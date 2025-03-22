@@ -12,6 +12,14 @@ public class Board {
     private int cols;
     private List<Cell> cells;
 
+    public Board() {}
+
+    public Board(List<Cell> cells) {
+        this.rows = 16;
+        this.cols = 16;
+        this.cells = cells;
+    }
+
     public Board(int rows, int cols, List<Cell> cells) {
         this.rows = rows;
         this.cols = cols;

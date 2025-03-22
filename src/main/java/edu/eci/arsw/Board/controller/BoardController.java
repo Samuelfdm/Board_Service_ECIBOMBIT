@@ -4,7 +4,7 @@ import edu.eci.arsw.Board.dto.BoardRequestDTO;
 import edu.eci.arsw.Board.dto.BoardResponseDTO;
 import edu.eci.arsw.Board.model.Board;
 import edu.eci.arsw.Board.service.BoardService;
-//import edu.eci.arsw.Board.service.PredefinedMaps;
+import edu.eci.arsw.Board.service.PredefinedMaps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +13,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/boards")
+@CrossOrigin("*") // Permite que el front se conecte sin problemas
 public class BoardController {
 
     @Autowired
     private final BoardService boardService;
 
-//    @Autowired
-//    private PredefinedMaps predefinedMaps;
+    @Autowired
+    private PredefinedMaps predefinedMaps;
 
     @Autowired
     public BoardController(BoardService boardService) {
@@ -28,16 +29,11 @@ public class BoardController {
 
     //Generacion de mapas
 
-//    @PostMapping
-//    public ResponseEntity<Board> generateBoard(@RequestParam int mapId) {
-//        Board board = predefinedMaps.generatePredefinedBoard(mapId);
-//        return ResponseEntity.ok(board);
-//    }
-//
-//    @GetMapping("/maps")
-//    public ResponseEntity<List<MapInfo>> getAvailableMaps() {
-//        return ResponseEntity.ok(predefinedMaps.getMaps());
-//    }
+    @GetMapping("/random")
+    public ResponseEntity<Board> getRandomBoard() {
+        Board board = predefinedMaps.generateRandomBoard();
+        return ResponseEntity.ok(board);
+    }
 
     //Operaciones Crud basicas
 
